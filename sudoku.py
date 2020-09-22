@@ -1,4 +1,22 @@
 import numpy as np
+import random
+
+
+global iniBoard
+iniBoard = [[0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0]]
+
+
+
+
+
 
 def isSafe(board,row,col,num):
 	# check row and column for duplicate
@@ -16,6 +34,23 @@ def isSafe(board,row,col,num):
 				return False
 	#No duplicate found declare safe
 	return True			
+	
+	
+def genSudoku():
+	global iniBoard
+	genBoard = iniBoard
+	fills = 0
+	pointstofill = 20
+	while (fills < pointstofill):
+		row = random.randrange(9)
+		col = random.randrange(9)
+		if (genBoard[row][col] == 0 ):
+			n = random.randrange(1,10)
+			if isSafe(genBoard,row,col,n):
+				genBoard[row][col] = n
+				fills += 1
+	return genBoard
+	
 	
 	
 	
@@ -43,10 +78,18 @@ def solver(board):
 						#print("solved at",row,col) #debug purposes
 						solver(board)
 						board[row][col]=0
-						#print("backtracking at",row,col)
+						print("backtracking at",row,col)
 				return
 	print(np.matrix(board))
-	#print(board)
 	input("Next Solution?")
+
 	
-solver(board)
+#solver(board)
+res = genSudoku()
+print(np.matrix(res))
+print("\n Solving.... \n")
+solved = solver(res)
+if solved == None:
+	print("catch none ")
+print("Solved:")
+print(np.matrix(solved))
