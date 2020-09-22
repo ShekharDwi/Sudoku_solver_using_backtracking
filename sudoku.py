@@ -81,7 +81,7 @@ def solver(board):
 						print("backtracking at",row,col)
 				return
 	print(np.matrix(board))
-	input("Next Solution?")
+	input("Next Solution ?")
 
 	
 #solver(board)
