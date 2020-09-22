@@ -40,7 +40,7 @@ def solver(board):
 				for i in range(1,10):
 					if isSafe(board,row,col,i):
 						board[row][col] = i
-						#print("solved at",row,col)
+						#print("solved at",row,col) #debug purposes
 						solver(board)
 						board[row][col]=0
 						#print("backtracking at",row,col)
